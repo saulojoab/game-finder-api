@@ -18,9 +18,6 @@ module.exports = {
       dateOfBirth,
       gender,
       location,
-      skillLevel,
-      preferredPosition,
-      teamPreferences,
     } = req.body;
 
     if (
@@ -30,12 +27,9 @@ module.exports = {
       !phoneNumber ||
       !dateOfBirth ||
       !gender ||
-      !location ||
-      !skillLevel ||
-      !preferredPosition ||
-      !teamPreferences
+      !location
     ) {
-      return res.status(StatusCodes.BAD_REQUEST);
+      return res.status(StatusCodes.BAD_REQUEST).send();
     }
 
     try {
@@ -49,9 +43,6 @@ module.exports = {
         dateOfBirth,
         gender,
         location,
-        skillLevel,
-        preferredPosition,
-        teamPreferences,
       });
 
       return res.status(StatusCodes.CREATED).send();

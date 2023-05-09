@@ -24,22 +24,10 @@ const DataSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ["Male", "Female", "Other"],
+    enum: ["Masculino", "Feminino", "Outro"],
     required: true,
   },
   location: {
-    type: String,
-    required: true,
-  },
-  skillLevel: {
-    type: String,
-    required: true,
-  },
-  preferredPosition: {
-    type: String,
-    required: true,
-  },
-  teamPreferences: {
     type: String,
     required: true,
   },
