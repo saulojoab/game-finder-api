@@ -53,19 +53,8 @@ module.exports = {
   },
 
   async update(req, res) {
-    const {
-      fullName,
-      email,
-      password,
-      phoneNumber,
-      dateOfBirth,
-      gender,
-      location,
-      skillLevel,
-      preferredPosition,
-      teamPreferences,
-      paymentInformation,
-    } = req.body;
+    const { fullName, email, phoneNumber, dateOfBirth, gender, location } =
+      req.body;
 
     const id = req.params.id;
 
@@ -74,15 +63,10 @@ module.exports = {
       Object.entries({
         fullName,
         email,
-        password,
         phoneNumber,
         dateOfBirth,
         gender,
         location,
-        skillLevel,
-        preferredPosition,
-        teamPreferences,
-        paymentInformation,
       }).filter(([key, value]) => value !== undefined)
     );
 

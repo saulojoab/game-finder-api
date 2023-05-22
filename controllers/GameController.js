@@ -15,6 +15,8 @@ module.exports = {
   async store(req, res) {
     const { title, description, dateTime, location, organizer } = req.body;
 
+    console.log(req.body);
+
     if (!title || !dateTime || !location || !description || !organizer) {
       return res.status(StatusCodes.BAD_REQUEST).send();
     }
@@ -176,5 +178,29 @@ module.exports = {
     await game.save();
 
     return res.json({ message: "User removed from player list", game });
+  },
+  async getAllGamesFromUser(req, res) {
+    const { userId } = req.params;
+
+    console.log("here");
+
+    try {
+      const games = await Game.find({ organizer: userId })
+        .populate("organizer")
+        .populate("playerList");
+
+      if (!games) {
+        return res
+          .status(StatusCodes.NOT_FOUND)
+          .json({ message: "Games not found." });
+      }
+
+      return res.status(StatusCodes.OK).json(games);
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "Internal server error." });
+    }
   },
 };

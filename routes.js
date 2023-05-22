@@ -2,6 +2,7 @@ const { Router } = require("express");
 
 const UserController = require("./controllers/UserController");
 const GameController = require("./controllers/GameController");
+const RatingController = require("./controllers/RatingController");
 
 const routes = Router();
 
@@ -22,5 +23,13 @@ routes.delete(
   "/games/:gameId/:userId",
   GameController.removeUserFromPlayerList
 );
+routes.get("/games/user/:userId", GameController.getAllGamesFromUser);
+
+routes.get("/ratings", RatingController.index);
+routes.post("/ratings", RatingController.store);
+routes.put("/ratings", RatingController.update);
+routes.get("/ratings/user/:id", RatingController.findByUser);
+routes.get("/ratings/game/:id", RatingController.findByGame);
+routes.get("/ratings/:game/:user", RatingController.findByUserAndGame);
 
 module.exports = routes;
